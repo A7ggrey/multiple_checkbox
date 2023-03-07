@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Checkbox</title>
+	<style>
+    /* Style for the "Check All" checkbox */
+    #checkAll {
+        margin-bottom: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+	
+<br><br>
+<form method="POST" action="checkbox.php">
+
+    <select name="category">
+        <option>Select A Category</option>
+        <option value="1">Category 1 = 8,000</option>
+        <option value="2">Category 2 = 10,000</option>
+        <option value="3">Category 3 = 12,000</option>
+        <option value="4">Category 4 = 15,000</option>
+    </select>
+    <br><br><br>
+<input type="checkbox" id="checkAll"> Check All<br>
+<input type="checkbox" name="checkbox[]" value="1"> Checkbox 1
+<br>
+<input type="checkbox" name="checkbox[]" value="2"> Checkbox 2
+<br>
+<input type="checkbox" name="checkbox[]" value="3"> Checkbox 3
+<br>
+<input type="checkbox" name="checkbox[]" value="4"> Checkbox 4
+<br>
+
+<input type="submit" name="submit" value="submit">
+
+</form>
+
+
+</body>
+<script>
+    // Get the "Check All" checkbox
+    var checkAll = document.getElementById("checkAll");
+
+    // Get all other checkboxes
+    var checkboxes = document.getElementsByName("checkbox[]");
+
+    // Add a click event listener to the "Check All" checkbox
+    checkAll.addEventListener("click", function () {
+        // Loop through all other checkboxes and set their checked state to match the "Check All" checkbox
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = checkAll.checked;
+        }
+    });
+
+    // Add click event listeners to all other checkboxes
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener("click", function () {
+            // If any other checkbox is unchecked, uncheck the "Check All" checkbox
+            for (var j = 0; j < checkboxes.length; j++) {
+                if (!checkboxes[j].checked) {
+                    checkAll.checked = false;
+                    return;
+                }
+            }
+
+            // If all other checkboxes are checked, check the "Check All" checkbox
+            checkAll.checked = true;
+        });
+    }
+</script>
+
+</html>
